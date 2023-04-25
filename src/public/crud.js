@@ -9,10 +9,6 @@ createUserButton.addEventListener("click", (event) => {
     const name = form.elements["name"].value;
     const age = form.elements["age"].value;
     const email = form.elements["email"].value;
-    if (name === "" || age === "" || email === "") {
-        alert("Por favor, completa todos los campos.");
-        return;
-    }
 
     const data = { name, age, email };
     if (validateForm(name, age, email)) {
@@ -47,10 +43,6 @@ updateUserButton.addEventListener("click", (event) => {
     const name = form.elements["name"].value;
     const age = form.elements["age"].value;
     const email = form.elements["email"].value;
-    if (name === "" || age === "" || email === "") {
-        alert("Por favor, completa todos los campos.");
-        return;
-    }
 
     const data = { name, age, email };
     if (validateForm(name, age, email)) {
