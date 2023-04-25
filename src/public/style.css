@@ -61,7 +61,10 @@ body {
     font-weight: bold;
     margin-top: 10px;
   }
-
+div{
+  text-align: end;
+  margin-right: 40px;
+}
   .hero__cta{
     text-decoration: none;
     color: black;
