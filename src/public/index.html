@@ -4,47 +4,56 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="style.css">
-    <title>Crear usuario</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+    <title>Usuarios</title>
 </head>
 
 <body>
-    <h1>Crear nuevo usuario</h1>
-    <form id='user-form'>
-        <label for="name">Nombre:</label>
-        <input type="text" id="name" name="name" required><br><br>
+    <h1><i class="fa-solid fa-user"></i> CRUD Usuarios</h1>
+    <div class="orientacion-boton">
+        <a href="#" class="hero__cta">Add user</a>
+    </div>
+    
+    <table class="content-table">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Edad</th>
+                <th>Email</th>
+                <th>Opciones</th>
+            </tr>
+        </thead>
+        <tbody id="user-table">
+        </tbody>
+    </table>
 
-        <label for="age">Edad:</label>
-        <input type="number" id="age" name="age" required><br><br>
+    <section class="modal ">
+        <div class="modal__container">
+            <h2 class="Titulo" id="codi">Crear nuevo usuario</h2>
+            <h2 class="Titulo" id="codigoUsuario"></h2>
+            <form id='user-form'>
+                <label for="name">Nombre:</label>
+                <input type="text" id="name" name="name" required><br><br>
 
-        <label for="email">Correo electrónico:</label>
-        <input type="email" id="email" name="email" required><br><br>
+                <label for="age">Edad:</label>
+                <input type="number" id="age" name="age" required><br><br>
 
-        <button id='create-user-btn' type="submit">Crear usuario</button>
-    </form>
-    <script>
-        const form = document.getElementById("user-form");
-        const createUserButton = document.getElementById("create-user-btn");
+                <label for="email">Correo electrónico:</label>
+                <input type="email" id="email" name="email" required><br><br>
 
-        createUserButton.addEventListener("click", (event) => {
-            event.preventDefault(); // prevenir que se envíe el formulario automáticamente
+                <button id='create-user-btn' class="place_order" type="submit" name="crear">Crear usuario</button>
+                <button id='update-user-btn' type="submit" name="actualizar">Editar usuario</button>
+            </form>
 
-            const name = form.elements["name"].value;
-            const age = form.elements["age"].value;
-            const email = form.elements["email"].value;
+            <a href="#" class="modal__close">Cerrar Modal</a>
+        </div>
+    </section>
 
-            const data = { name, age, email };
-            fetch(`http://localhost:9000/api/users/${}`, {
-                method: "PUT",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(data),
-            })
-                .then((response) => response.json())
-                .then((data) => console.log(data))
-                .catch((error) => console.error(error));
-        });
-    </script>
+
+    <script src="https://kit.fontawesome.com/a40d537f92.js" crossorigin="anonymous"></script>
+    <script src="crud.js"></script>
+
 </body>
 
 </html>

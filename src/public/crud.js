@@ -12,7 +12,7 @@ createUserButton.addEventListener("click", (event) => {
 
     const data = { name, age, email };
     if (validateForm(name, age, email)) {
-        fetch("http://localhost:9000/api/users", {
+        fetch("/api/users", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -46,7 +46,7 @@ updateUserButton.addEventListener("click", (event) => {
 
     const data = { name, age, email };
     if (validateForm(name, age, email)) {
-        fetch(`http://localhost:9000/api/users/${updateUserButton.getAttribute('data-id')}`, {
+        fetch(`/api/users/${updateUserButton.getAttribute('data-id')}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
@@ -98,7 +98,7 @@ const titulo = document.getElementById('codi');
 const codi = document.getElementById('codigoUsuario');
 
 function listarUsuario(){
-    fetch('http://localhost:9000/api/users')
+    fetch('/api/users')
     .then(response => response.json())
     .then(data => {
         data.forEach(user => {
@@ -139,7 +139,7 @@ function listarUsuario(){
             deleteButton.appendChild(icono2);
             deleteButton.onclick = (e)=>{
                 if (confirm(`¿Estás seguro que deseas eliminar el usuario con ID ${e.target.getAttribute('data-id')}?`)) {
-                    fetch(`http://localhost:9000/api/users/${e.target.getAttribute('data-id')}`, {
+                    fetch(`/api/users/${e.target.getAttribute('data-id')}`, {
                         method: 'DELETE'
                     })
                     .then((response) => response.json())
