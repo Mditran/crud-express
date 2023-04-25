@@ -146,3 +146,13 @@ body {
     color: #F26250;
     background-color: #fff;
 }
+
+.place_order
+{
+  position: fixed;
+  opacity: 0;
+  pointer-events: none;
+    transition: opacity .6s .9s;
+    --transform: translateY(-100vh);
+    --transition: transform .8s;
+}
