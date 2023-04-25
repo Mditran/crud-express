@@ -156,3 +156,84 @@ body {
     --transform: translateY(-100vh);
     --transition: transform .8s;
 }
+
+
+table {
+  table-layout: fixed;
+  width: 100%;
+  border-collapse: collapse;
+  border: 3px solid purple;
+  
+}
+thead th {
+  font-size: 1.8rem;
+}
+tbody tr {
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+thead th:nth-child(1) {
+  width: 30%;
+}
+
+thead th:nth-child(2) {
+  width: 20%;
+}
+
+thead th:nth-child(3) {
+  width: 15%;
+}
+
+thead th:nth-child(4) {
+  width: 35%;
+}
+
+th, td {
+  padding: 20px;
+  text-align: center;
+}
+
+.content-table {
+  border-collapse: collapse;
+  margin: 25px 0;
+  font-size: 0.9em;
+  min-width: 400px;
+  border-radius: 5px 5px 0 0;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.content-table thead tr {
+  background-color: #009879;
+  color: #ffffff;
+  text-align: left;
+  font-weight: bold;
+}
+
+.content-table th,
+.content-table td {
+  padding: 12px 15px;
+}
+
+.content-table tbody tr {
+  border-bottom: 1px solid black;
+}
+
+.edit-btn {
+  background-color: #1e3c72;
+  color: #f5f5f5;
+  font-size: 1.4rem;
+  height: 3rem;
+  width: 3rem;
+  border-radius: 10%;
+}
+
+.delete-btn {
+  background-color: #f00;
+  color: #f5f5f5;
+  font-size: 1.4rem;
+  height: 3rem;
+  width: 3rem;
+  border-radius: 10%;
+  margin-left: 20px;
+}

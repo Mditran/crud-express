@@ -96,28 +96,37 @@ function listarUsuario(){
             const accionsCell = document.createElement('td');
             const updateButton = document.createElement('Button');
             const deleteButton = document.createElement('Button');
+            const icono1 = document.createElement('i');
+            const icono2 = document.createElement('i');
 
             nameCell.textContent = user.name;
             ageCell.textContent = user.age;
             emailCell.textContent = user.email;
             updateButton.classList.add("edit-btn");
             deleteButton.classList.add("delete-btn");
-            updateButton.textContent = 'Update';
+            icono1.classList.add("fa-pen-to-square");
+            icono1.classList.add("fa-solid");
+            icono1.classList.add("fa-sharp");
+            updateButton.appendChild(icono1);
             updateButton.setAttribute('data-id', user._id);
             deleteButton.setAttribute('data-id', user._id);
             updateButton.onclick = (e)=>{
                 alert(e.target.getAttribute('data-id'))
+                alert(updateButton.getAttribute('data-id'))
                 updateUserButton.classList.remove('place_order');
                 createUserButton.classList.add('place_order');
                 modal.classList.add('modal--show');
                 titulo.innerHTML = `Editar usuario: ${user.name}`;
-                updateUserButton.setAttribute('data-id',e.target.getAttribute('data-id'))
+                updateUserButton.setAttribute('data-id', updateButton.getAttribute('data-id'))
                 console.log(updateUserButton.getAttribute('data-id'))
                 form.elements["name"].value = user.name;
                 form.elements["age"].value = user.age;
                 form.elements["email"].value = user.email;
             }
-            deleteButton.textContent = 'Delete';
+            icono2.classList.add("fa-solid");
+            icono2.classList.add("fa-sharp");
+            icono2.classList.add("fa-trash");
+            deleteButton.appendChild(icono2);
             deleteButton.onclick = (e)=>{
                 if (confirm(`¿Estás seguro que deseas eliminar el usuario con ID ${e.target.getAttribute('data-id')}?`)) {
                     fetch(`http://localhost:9000/api/users/${e.target.getAttribute('data-id')}`, {
