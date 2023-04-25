@@ -3,6 +3,7 @@ const createUserButton = document.getElementById("create-user-btn");
 const updateUserButton = document.getElementById("update-user-btn");
 
 listarUsuario();
+
 createUserButton.addEventListener("click", (event) => {
     event.preventDefault(); // prevenir que se envíe el formulario automáticamente
     const name = form.elements["name"].value;
@@ -14,7 +15,8 @@ createUserButton.addEventListener("click", (event) => {
     }
 
     const data = { name, age, email };
-    fetch("http://localhost:9000/api/users", {
+    if (validateForm(name, age, email)) {
+        fetch("http://localhost:9000/api/users", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -27,11 +29,17 @@ createUserButton.addEventListener("click", (event) => {
         modal.classList.remove('modal--show');
         alert("Usuario registrado correctamente.");
         // Limpiar los campos del formulario
-        limpiarDatos();
+        
         userTableBody.replaceChildren();
         listarUsuario();
     })
     .catch((error) => console.error(error));
+        alert("El formulario se ha enviado correctamente.");
+        form.reset();
+    }else{
+        alert("Por favor, llene todos los campos")
+    }
+    
 });
 
 updateUserButton.addEventListener("click", (event) => {
@@ -45,24 +53,28 @@ updateUserButton.addEventListener("click", (event) => {
     }
 
     const data = { name, age, email };
-    fetch(`http://localhost:9000/api/users/${updateUserButton.getAttribute('data-id')}`, {
-        method: "PUT",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-    })
-    .then((response) => response.json())
-    .then((data) => {
-        console.log(data);
-        modal.classList.remove('modal--show');
-        alert("Usuario actulizado correctamente.");
-        // Limpiar los campos del formulario
-        limpiarDatos();
-        userTableBody.replaceChildren();
-        listarUsuario();
-    })
-    .catch((error) => console.error(error));
+    if (validateForm(name, age, email)) {
+        fetch(`http://localhost:9000/api/users/${updateUserButton.getAttribute('data-id')}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            console.log(data);
+            modal.classList.remove('modal--show');
+            alert("Usuario actulizado correctamente.");
+            // Limpiar los campos del formulario
+            limpiarDatos();
+            userTableBody.replaceChildren();
+            listarUsuario();
+        })
+        .catch((error) => console.error(error));
+    }else{
+        alert("Por favor, llene todos los campos")
+    }
 });
 
 function limpiarDatos(){
@@ -80,6 +92,7 @@ openModal.addEventListener('click', (e)=>{
     titulo.innerHTML = 'Crear usuario';
     createUserButton.classList.remove('place_order');
     updateUserButton.classList.add('place_order');
+    limpiarDatos();
     modal.classList.add('modal--show');
 });
 
@@ -119,14 +132,11 @@ function listarUsuario(){
             updateButton.setAttribute('data-id', user._id);
             deleteButton.setAttribute('data-id', user._id);
             updateButton.onclick = (e)=>{
-                alert(e.target.getAttribute('data-id'))
-                alert(updateButton.getAttribute('data-id'))
                 updateUserButton.classList.remove('place_order');
                 createUserButton.classList.add('place_order');
                 modal.classList.add('modal--show');
                 titulo.innerHTML = `Editar usuario: ${user.name}`;
                 updateUserButton.setAttribute('data-id', updateButton.getAttribute('data-id'))
-                console.log(updateUserButton.getAttribute('data-id'))
                 form.elements["name"].value = user.name;
                 form.elements["age"].value = user.age;
                 form.elements["email"].value = user.email;
@@ -142,7 +152,6 @@ function listarUsuario(){
                     })
                     .then((response) => response.json())
                     .then((data) => {
-                        console.log(data);
                         alert('Usuario eliminado correctamente.');
                         userTableBody.replaceChildren();
                         listarUsuario();
@@ -164,3 +173,24 @@ function listarUsuario(){
     .catch(error => console.error(error));
 }
 
+function validateForm(name, edad,email) {
+    let isValid = true;
+    if (name.trim() === "") {
+        isValid = false;
+    } 
+    if (edad.trim() === "") {
+        isValid = false;
+    }
+    if (email.trim() === "") {
+        isValid = false;
+    } else if (!isEmail(email.trim())) {
+        alert("El correo electrónico no es válido");
+        isValid = false;
+    } 
+    return isValid;
+}
+
+function isEmail(email) {
+    const regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@(([0-9]{1,3}\.){3}[0-9]{1,3}|(([a-zA-Z0-9]+\.)*[a-zA-Z]{2,}))$/;
+    return regex.test(String(email).toLowerCase());
+}
