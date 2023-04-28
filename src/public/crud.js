@@ -138,8 +138,8 @@ function listarUsuario(){
             icono2.classList.add("fa-trash");
             deleteButton.appendChild(icono2);
             deleteButton.onclick = (e)=>{
-                if (confirm(`¿Estás seguro que deseas eliminar el usuario con ID ${e.target.getAttribute('data-id')}?`)) {
-                    fetch(`/api/users/${e.target.getAttribute('data-id')}`, {
+                if (confirm(`¿Estás seguro que deseas eliminar el usuario con ID ${deleteButton.getAttribute('data-id')}?`)) {
+                    fetch(`/api/users/${deleteButton.getAttribute('data-id')}`, {
                         method: 'DELETE'
                     })
                     .then((response) => response.json())
